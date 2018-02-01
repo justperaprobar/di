@@ -1,0 +1,36 @@
+@font-face{
+    font-family: Titulos;
+    src: url(../fonts/Mattoa_Demo.ttf);
+}
+h1 {
+    font-family: Titulos;
+    color: white;
+}
+.fondo_campo{
+    width:0px;
+    transition: width 2s;
+}
+.fondo_campo_activo{
+    width: 100%;
+    background: url(../img/campo_futbol.jpeg) no-repeat;
+}
+#marco_logo{
+    width: 0px;
+    transition: width 5s;
+}
+#marco_logo_activo{
+    position: absolute;
+    top: 50%;
+    display: inline-block;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 5em;
+    text-shadow: 2px 2px #030800;
+}
+#pelota{
+    position: absolute;
+    display: inline-block;
+    width: 25px;
+    top:48%;
+    left:38%;
+}

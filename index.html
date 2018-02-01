@@ -4,9 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">  
+  <link rel="stylesheet" href="./css/style.css">
   <title>FutFamily - Fútbol para toda la familia</title>
+  <script src="./js/jquery-3.3.1.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      var ancho = $(window).width();
+      var alto = $(window).height();
+      let coords = document.getElementById("pelota").getBoundingClientRect();
+      console.log(coords.left);
+      $("#pelota").click(function(){
+        $(this).attr("left", coords.left+20+"%");
+      });
+      $("#fondo_campo").attr("width", ancho);
+      $("#fondo_campo").attr("height", alto);
+    });
+  </script>
 </head>
-<body>
-  
+<body class="">
+  <div class="container-fluid"></div>
+  <div class="container-fluid fondo_campo">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">        
+        <img id="fondo_campo" src="./img/campo_futbol.jpeg" alt="imagen de fondo">    
+        <img src="./img/pelota.png" id="pelota">    
+        <h1 id="marco_logo" class="text-center">FutFamily</h1>       
+      </div>      
+    </div>
+  </div>
+  <div class="container-fluid"></div>
 </body>
 </html>
