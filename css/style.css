@@ -2,30 +2,43 @@
     font-family: Titulos;
     src: url(../fonts/Mattoa_Demo.ttf);
 }
+@font-face{
+    font-family: Anton-Regular;
+    src: url(../fonts/Anton-Regular.ttf);
+}
+body{
+    font-family: 'Anton-Regular', sans-serif;
+}
 h1 {
     font-family: Titulos;
     color: white;
 }
-.fondo_campo{
-    width:0px;
-    transition: width 2s;
+
+#fondo_campo{    
+    display: none;   
 }
-.fondo_campo_activo{
-    width: 100%;
-    background: url(../img/campo_futbol.jpeg) no-repeat;
+.oculto {
+    display: none;
 }
-#marco_logo{
-    width: 0px;
-    transition: width 5s;
-}
-#marco_logo_activo{
+.marco_logo{
     position: absolute;
     top: 50%;
-    display: inline-block;
+    display: none;
     width: 100%;
     margin: 0 auto;
     font-size: 5em;
     text-shadow: 2px 2px #030800;
+}
+.marco_logo_final{
+    position: relative;
+    width: 100%;
+}
+.form-busqueda{
+    background-color: rgba(0, 255, 234, 0.9);
+    width: 450px;
+    padding: 1em;
+    border-radius: 8px;
+
 }
 #pelota{
     position: absolute;
@@ -33,4 +46,12 @@ h1 {
     width: 25px;
     top:48%;
     left:38%;
+}
+@media screen and (max-width:450px){
+    .marco_logo{
+        font-size: 3em;
+    }
+    .form-busqueda{
+        width: 100%;
+    }
 }
