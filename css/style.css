@@ -8,6 +8,7 @@
 }
 body{
     font-family: 'Anton-Regular', sans-serif;
+    letter-spacing: 0.05em;
 }
 h1 {
     font-family: Titulos;
@@ -21,13 +22,18 @@ h1 {
     display: none;
 }
 .marco_logo{
-    position: absolute;
+    position: absolute;    
+    cursor: default;
     top: 50%;
     display: none;
     width: 100%;
     margin: 0 auto;
     font-size: 5em;
     text-shadow: 2px 2px #030800;
+}
+.marco_logo a {
+    text-decoration: none;
+    color: white;
 }
 .marco_logo_final{
     position: relative;
@@ -38,8 +44,10 @@ h1 {
     width: 450px;
     padding: 1em;
     border-radius: 8px;
-
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.4);
 }
+
+
 #pelota{
     position: absolute;
     display: inline-block;
