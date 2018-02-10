@@ -11,12 +11,54 @@
   <title>FutFamily - Fútbol para toda la familia</title>
   <script src="./js/jquery-3.3.1.min.js"></script>
   <script src="./js/bootstrap.min.js"></script>
+  <script type="text/javascript"
+		src="http://maps.google.com/maps/api/js?key=AIzaSyB5Dyla9-tFG4XdsYqTmu6oU7A2xUxSZYA"></script>
   <script>
+    var mapa;
+    var geocoder = new google.maps.Geocoder;
+    var infowindow = new google.maps.InfoWindow;
+
+    function CargarMapa() {
+      //  Creamos las opciones
+      var opciones = {
+        zoom : 15,
+        center: new google.maps.LatLng("37.3754865","-6.0250989")
+      };
+      
+      //var infowindow = new google.maps.InfoWindow;
+
+      mapa = new google.maps.Map(document.getElementById("divMapa"), opciones);
+      codeID();
+      //  Creamos el mapa:
+      
+    }
+    function codeID() {
+      var idSitio = $('#equipo')
+      geocoder.geocode( { 'placeId': idSitio.val()}, function(results, status) {
+        if (status == 'OK') {
+          mapa.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+              map: mapa,
+              position: results[0].geometry.location
+          });
+          var equipoSeleccionado = $("#equipo option:selected").text();
+          infowindow.setContent(equipoSeleccionado+"<br>"+results[0].formatted_address);
+          //let posicion = new google.maps.LatLng(results[0].geometry.location.lat, results[0].geometry.location.lng);
+          //console.log(results[0]);
+          infowindow.open(mapa, marker);
+
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    }
+
     $(document).ready(function(){
       var ancho = $(window).width();
       var alto = $(window).height();
       var campo = $("#fondo_campo");
       var marcoLogo = $("#marco_logo");
+      
       //let coords = document.getElementById("pelota").getBoundingClientRect();
       //console.log(coords.left);
       /*$("#pelota").click(function(){
@@ -34,13 +76,21 @@
             }, 1500, function(){
               $(".navbar.oculto").fadeIn(700);
               marcoLogo.addClass("marco_logo_final");
-              $("#wForm").fadeIn(700);
-
+              $("#wForm").fadeIn(700, function(){
+                $("#btnBusqueda").click(function(e){
+                  e.preventDefault();
+                  $("#wForm").fadeOut(1500, function(){
+                    CargarMapa();
+                    $("#divMapa").fadeIn(900);                    
+                  });
+                });
+              });
+              
             });           
           });
         });
       });
-
+      
     });
   </script>
 </head>
@@ -78,13 +128,39 @@
           <form class="form-busqueda text-center" action="" method="POST">
             <label class="">¿QUÉ EQUIPO VAS A VISITAR?</label>
             <div class="form-group">              
-              <input type="text" name="ciudad" id="ciudad" class="form-control">
+              <!--<input type="text" name="ciudad" id="ciudad" class="form-control">-->
+              <select class="custom-select" id="equipo" name="equipo">
+                <option selected>Selecciona un equipo...</option>
+                <option value="ChIJLSHbT8RZcg0RzzLKyZLcJWA">Deportivo Alavés</option>
+                <option value="ChIJT54lBDBQTg0RREbjJEJ3Y90">Athletic Club</option>
+                <option value="ChIJJ0XT18InQg0RnBG3vI2FnAw">Atlético de Madrid</option>
+                <option value="ChIJt8A1A1-YpBIR2W966dIUyqk">FC Barcelona</option>
+                <option value="ChIJnzDYA39uEg0RVZXb5oIxgVw">Real Betis Balompié</option>
+                <option value="ChIJna-vqOSJJQ0RVNBNRe73Lg8">Celta de Vigo</option>
+                <option value="ChIJVVVVVWUqTg0R7Rj7tzHAkA8">Eibar</option>
+                <option value="ChIJVaz1-VGZpBIRsLwEtaB6W00">RCD Espanyol</option>
+                <option value="ChIJs5JyQ84gQg0R06Evv9kKVkg">Getafe</option>
+                <option value="ChIJv_rTjy3huhIRb47iQKBfhzg">Girona</option>
+                <option value="ChIJpZ2-iGB8Lg0Rhj2ELUDKq7k">Deportivo de La Coruña</option>
+                <option value="ChIJ1dWzGg2VQAwRVRnET-LA1DY">UD Las Palmas</option>
+                <option value="ChIJ29fbe-2JQQ0R83_2X5mJE4g">CD Leganés</option>
+                <option value="ChIJFeFE7BpGYA0Ra_Czi1vgtWI">Levante</option>
+                <option value="ChIJOxOdieIoQg0Rqzv-30zJ9aw">Real Madrid</option>
+                <option value="ChIJh3wv57H3cg0RpB5NJDipZT0">Malaga CF</option>
+                <option value="ChIJV7Z5BL1uEg0RYDgX4yLyLwY">Sevilla FC</option>
+                <option value="ChIJwXAeyO2vUQ0R99RuajN9jY8">Real Sociedad</option>
+                <option value="ChIJrcZ5ob5IYA0Ry8PvM7G8GwA">Valencia CF</option>
+                <option value="ChIJ_y5aRgMHYA0RSvSY11IPmRg">Villareal CF</option>
+              </select>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-success form-control" name="submit">BUSCAR</button>            
+              <button type="submit" id="btnBusqueda" class="btn btn-success form-control" name="submit">BUSCAR</button>            
             </div>
           </form>        
       </div>
+    </div>
+    <div class="row justify-content-center">
+        <div id="divMapa" class="oculto"></div>
     </div>
   <div class="container-fluid"></div>
 </body>
