@@ -16,7 +16,7 @@
   <script>
     var mapa;
     var geocoder = new google.maps.Geocoder;
-    var infowindow = new google.maps.InfoWindow;
+       
 
     function CargarMapa() {
       //  Creamos las opciones
@@ -37,22 +37,54 @@
       geocoder.geocode( { 'placeId': idSitio.val()}, function(results, status) {
         if (status == 'OK') {
           mapa.setCenter(results[0].geometry.location);
-          var marker = new google.maps.Marker({
+          /*var marker = new google.maps.Marker({
               map: mapa,
               position: results[0].geometry.location
-          });
+          });*/
           var equipoSeleccionado = $("#equipo option:selected").text();
-          infowindow.setContent(equipoSeleccionado+"<br>"+results[0].formatted_address);
+          var imagen = imagenEquipo(equipoSeleccionado);
+          let contenido = "<div class='card' style='width: 15rem;'>"+
+          "<img class='card-img-top imgCard' src='"+imagen+"' alt='Card image cap'><div class='card-block'>"+
+          "<h4 class='card-title'>"+equipoSeleccionado+"</h4><p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>"+
+          "<a href='#' class='btn btn-primary'>Go somewhere</a></div></div>";
           //let posicion = new google.maps.LatLng(results[0].geometry.location.lat, results[0].geometry.location.lng);
+          var infowindow = new google.maps.InfoWindow({
+            content : contenido,
+            position: results[0].geometry.location
+          });
+          
+          
           //console.log(results[0]);
-          infowindow.open(mapa, marker);
+
+          infowindow.open(mapa);
 
         } else {
           alert('Geocode was not successful for the following reason: ' + status);
         }
       });
     }
+    function imagenEquipo(nombreEquipo){
+      var imagen;
+      switch(nombreEquipo){        
+        case 'Athletic Club':
+          imagen = "img/san_mames.JPG";
+          break;        
+        case 'FC Barcelona':
+          imagen = "img/campnou.jpg";
+          break;
+        case 'Real Betis Balompié':
+          imagen = "img/benito_villamarin.jpg";
+          break;
+        case 'Real Madrid':
+          imagen = "img/bernabeu.jpg";
+          break;
+        case 'Sevilla FC':
+          imagen = "img/sanchez_pizjuan.jpg";
+          break;
+      }
 
+      return imagen;
+    } 
     $(document).ready(function(){
       var ancho = $(window).width();
       var alto = $(window).height();
@@ -81,7 +113,7 @@
                   e.preventDefault();
                   $("#wForm").fadeOut(1500, function(){
                     CargarMapa();
-                    $("#divMapa").fadeIn(200);                    
+                    $("#divMapa").fadeIn(500);                    
                   });
                 });
               });
