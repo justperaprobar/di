@@ -42,11 +42,11 @@
               position: results[0].geometry.location
           });*/
           var equipoSeleccionado = $("#equipo option:selected").text();
-          var imagen = imagenEquipo(equipoSeleccionado);
+          var info = imagenEquipo(equipoSeleccionado);
           let contenido = "<div class='card' style='width: 15rem;'>"+
-          "<img class='card-img-top imgCard' src='"+imagen+"' alt='Card image cap'><div class='card-block'>"+
-          "<h4 class='card-title'>"+equipoSeleccionado+"</h4><p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>"+
-          "<a href='#' class='btn btn-primary'>Go somewhere</a></div></div>";
+          "<img class='card-img-top imgCard' src='"+info.imagen+"' alt='Card image cap'><div class='card-block text-center'>"+
+          "<h4 class='card-title'>"+equipoSeleccionado+"</h4><p class='card-text'>"+info.informacion+"</p>"+
+          "<a href='"+info.enlace+"' class='btn btn-primary text-center'>Ver Equipo</a></div></div>";
           //let posicion = new google.maps.LatLng(results[0].geometry.location.lat, results[0].geometry.location.lng);
           var infowindow = new google.maps.InfoWindow({
             content : contenido,
@@ -64,26 +64,69 @@
       });
     }
     function imagenEquipo(nombreEquipo){
+      var info = {
+        "imagen" : "",
+        "informacion" : "",
+        "enlace" : ""
+      };
       var imagen;
+      var informacion;
+      var enlace;
+
       switch(nombreEquipo){        
         case 'Athletic Club':
           imagen = "img/san_mames.JPG";
+          informacion = "Viva el athletic";
+          enlace = "equipos/athletic.html";
+          info = {
+            "imagen" : imagen,
+            "informacion" : informacion,
+            "enlace" : enlace
+          };
           break;        
         case 'FC Barcelona':
           imagen = "img/campnou.jpg";
+          informacion = "Viva el Barcelona";
+          enlace = "equipos/barcelona.html";
+          info = {
+            "imagen" : imagen,
+            "informacion" : informacion,
+            "enlace" : enlace
+          };
           break;
         case 'Real Betis Balompié':
-          imagen = "img/benito_villamarin.jpg";
+          imagen = "img/benito_villamarin.jpg";          
+          informacion = "Viva el Betis";
+          enlace = "equipos/betis.html";
+          info = {
+            "imagen" : imagen,
+            "informacion" : informacion,
+            "enlace" : enlace
+          };
           break;
         case 'Real Madrid':
           imagen = "img/bernabeu.jpg";
+          informacion = "Viva el Madrid";
+          enlace = "equipos/madrid.html";
+          info = {
+            "imagen" : imagen,
+            "informacion" : informacion,
+            "enlace" : enlace
+          };
           break;
         case 'Sevilla FC':
           imagen = "img/sanchez_pizjuan.jpg";
+          informacion = "Viva el Sevilla";
+          enlace = "equipos/sevilla.html";
+          info = {
+            "imagen" : imagen,
+            "informacion" : informacion,
+            "enlace" : enlace
+          };
           break;
       }
 
-      return imagen;
+      return info;
     } 
     $(document).ready(function(){
       var ancho = $(window).width();
