@@ -32,13 +32,20 @@ h1 {
     font-size: 5em;
     text-shadow: 2px 2px #030800;
 }
-.marco_logo a {
+.marco_logo a, .logo_encabezado a {
     text-decoration: none;
     color: white;
 }
 .marco_logo_final{
     position: relative;
     width: 100%;
+}
+.logo_encabezado {
+    cursor: default;
+    width: 100%;
+    margin: 15px auto;
+    font-size: 5em;
+    text-shadow: 2px 2px #030800;
 }
 .form-busqueda{
     background-color: rgba(255, 52, 221, 0.9);
@@ -60,6 +67,12 @@ border-radius: 6px;
     width: 25px;
     top:48%;
     left:38%;
+}
+.card {
+    border: none;
+}
+.card-title {
+    margin-top:.25em;
 }
 @media screen and (max-width:450px){
     .marco_logo{

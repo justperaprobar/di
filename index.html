@@ -17,7 +17,7 @@
     var mapa;
     var geocoder = new google.maps.Geocoder;
        
-
+    
     function CargarMapa() {
       //  Creamos las opciones
       var opciones = {
@@ -32,6 +32,8 @@
       //  Creamos el mapa:
       
     }
+
+    //Esta función es la que se encarga de transformar el ID en la geoposición y crea el infoWindow
     function codeID() {
       var idSitio = $('#equipo')
       geocoder.geocode( { 'placeId': idSitio.val()}, function(results, status) {
@@ -45,7 +47,7 @@
           var info = imagenEquipo(equipoSeleccionado);
           let contenido = "<div class='card' style='width: 15rem;'>"+
           "<img class='card-img-top imgCard' src='"+info.imagen+"' alt='Card image cap'><div class='card-block text-center'>"+
-          "<h4 class='card-title'>"+equipoSeleccionado+"</h4><p class='card-text'>"+info.informacion+"</p>"+
+          "<h4 class='card-title'>"+equipoSeleccionado+"</h4><p class='card-text'>"+results[0].formatted_address+"</p>"+
           "<a href='"+info.enlace+"' class='btn btn-primary text-center'>Ver Equipo</a></div></div>";
           //let posicion = new google.maps.LatLng(results[0].geometry.location.lat, results[0].geometry.location.lng);
           var infowindow = new google.maps.InfoWindow({
@@ -183,16 +185,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="#">INICIO <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="index.html">INICIO <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">EQUIPOS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">CONÓCENOS</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">CONTACTO</a>
+          <a class="nav-link" href="contacto.html">CONTACTO</a>
         </li>
       </ul>
     </div>
