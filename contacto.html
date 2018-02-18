@@ -11,14 +11,40 @@
     <title>FutFamily | Contacto</title>
     <script src="./js/jquery-3.3.1.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var ancho = $(window).width();
+            var alto = $(window).height();
+            var pelota = $("#pelota");
+            var menu = $("#menu");
+            var logo = $("#marco_logo");
+
+            pelota.attr("height", alto);
+            pelota.attr("width", ancho);
+            pelota.fadeIn(200,function(){
+                pelota.addClass("animada");                
+            });
+            setTimeout(function(){
+                pelota.removeClass("animada");
+                setTimeout(function(){
+                    menu.fadeIn(300);
+                    logo.fadeIn(300);
+                    pelota.attr("height", 0);
+                    $("#form_contacto").fadeIn(100);
+                }, 4000);             
+            }, 5000);
+             
+        });
+        
+    </script>
 </head>
 <body style="background-image:url('img/fondo_campo.jpeg');">
     <div class="container-fluid">
         <div class="row">              
-            <h1 id="marco_logo" class="logo_encabezado text-center"><a href="index.html">FutFamily</a></h1>    
+            <h1 id="marco_logo" class="logo_encabezado oculto text-center"><a href="index.html">FutFamily</a></h1>    
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:white;">
+    <nav id="menu" class="navbar oculto navbar-expand-lg navbar-light" style="background-color:white;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -37,7 +63,33 @@
         </div>
     </nav><br>
     <div class="container">
-
+        <div class="row">
+            <img id="pelota" src="img/pelota.png" class="mx-auto oculto" alt="imagen pelota">
+        </div>
+        <div class="row fondo_amarillo">
+            <form id="form_contacto" action="#" method="post" class="col-sm-12 col-md-12 col-lg-12 oculto">
+                <legend class="text-center">Formulario de contacto</legend>
+                <div class="form-group">
+                    <label for="">Nombre</label>
+                    <input class="form-control" placeholder="Mágico González" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input class="form-control" placeholder="venimos@toloposible.com" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="">Asunto</label>
+                    <input class="form-control" placeholder="Tema de tu consulta, ¡sin rodeos!" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="">Mensaje</label>
+                    <textarea class="form-control" placeholder="Aquí es donde viene el tocho..." name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

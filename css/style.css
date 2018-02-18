@@ -7,7 +7,6 @@
     src: url(../fonts/Anton-Regular.ttf);
 }
 body{
-    overflow: hidden;
     font-family: 'Anton-Regular', sans-serif;
     letter-spacing: 0.05em;
 }
@@ -62,17 +61,26 @@ border: 1px solid rgb(255, 255, 255);
 border-radius: 6px;
 }
 #pelota{
-    position: absolute;
-    display: inline-block;
-    width: 25px;
-    top:48%;
-    left:38%;
+    transform: scale(0);
+    transition: all 4s;
+    transition-timing-function: ease-in-out;
+}
+#pelota.animada{
+    transform: scale(1);
+    transition: all 4s;
 }
 .card {
     border: none;
 }
 .card-title {
     margin-top:.25em;
+}
+.fondo_amarillo{
+    background-color: yellow;
+    border-radius: 4px;
+}
+.fondo_amarillo form {
+    padding: 25px 50px;
 }
 @media screen and (max-width:450px){
     .marco_logo{
