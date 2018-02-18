@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SFC</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .barra{
+      background: linear-gradient(to right, white, red);
+      text-align: center;
+      margin:2% 0 2% 0;
+      border-radius: 25px;
+    }
+    
+    .mapa{
+      /*  background-color: dimgrey;  */
+        height: 100%;
+    }
+    
+    .informacion{
+      /*  background-color: lime;   */
+    }
+    
+    h3,h4{
+        text-align: center;
+    }
+    .cartaCabecera{
+        background-color:red !important;
+        color:white;
+        border-color:black;
+    }
+    .cartaCabecera:hover{
+        background-color:white !important;
+        color:red;
+        border-color: 2px solid black;
+    }
+    .card{
+       height:100%;
+    }
+    .card-body{
+      font-size:20px;
+    }
+    .carousel .carousel-indicators li{
+        background-color: red;
+    }
+
+    .carousel-caption h4{
+        color:black;
+    }
+    .degradado{
+        color:black;
+        background: linear-gradient(to right, white, red);
+        opacity: .5;
+        border-radius: 25px;
+    }
+    .card:hover{
+        background-color:red;
+        color:white;
+        border-color:white;
+    }
+    .leyenda i{
+      font-size: 20px;
+    }
+    .prevision, .prevision i{
+      color:white;
+      font-size:20px;
+    }
+    .mapa h3{
+      border-left: 5px solid red;
+      text-align: left;
+      padding-left: 16px;
+    }
+    .eltiempo{
+      margin-top:5%;
+    }
+    table caption{
+      caption-side: top;
+      border: 1px solid black;
+      background-color:#212529;
+      color:white;
+    }
+    table tr{
+      font-size:1.16rem;
+    }
+    .modal-title{
+      color:red;
+    }
+    #mapaSevilla{
+      margin-top: 20px;
+      width: 100%;
+      height: 700px;
+    	border: 1px solid red; 
+    }
+  </style>
+
+
+
+<script type="text/javascript" 
+  src="http://maps.google.com/maps/api/js?key=AIzaSyCXOCjGmYFC1v8Cg3KF5HQrwOTTQE8lQQw">
+  //AIzaSyA6Bqzcoc3TVzxOZ4KESo6V0SgYMjWrlnQ   //no usar
+</script>
+
+<script src="pAJAX.js"></script>
+
+  <script type="text/javascript">
+
+      var peti = new pAJAX();
+
+      window.onload=function(){
+  	    
+        CargarMapa();
+
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+  
+    function CargarMapa() {
+      //aquí cargo el mapa
+      var divMapa = document.getElementById("mapaSevilla");
+      //centro - RSP
+      var centro=new google.maps.LatLng(37.3841, -5.9707);
+      //opciones
+      var opciones = { 
+        center: centro,
+        zoom: 14
+      };
+      //marker RSP
+      var rsp = new google.maps.Marker({
+        position: centro,
+        animation: google.maps.Animation.BOUNCE,
+        icon:'sfc_30_30.png'
+      });
+      //  Dibujamos el mapa:
+      var mapa = new google.maps.Map(divMapa, opciones);
+      //el marcador RSP
+      rsp.setMap(mapa);
+    }
+
+    </script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+  <div class="container-fluid">
+    <h1 class="barra">SEVILLA FÚTBOL CLUB</h1>
+    <!---->
+    <div class="row">
+        <!--mitad izquierda-->
+        <div class="col-md-6 mapa">
+            <section class="">
+                <div class="container mapa">
+                    <h3>Leyenda del mapa</h3>
+                    <div class="row leyenda">
+                      
+                        <!--estadio-->
+                        <div class="col-md-3 text-center">
+                            <i class="fa fa-futbol-o" data-toggle="tooltip" data-placement="top" title="Lugar donde vas a ver el partido"> - Estadio</i>
+                        </div>
+                        <!--turismo-->
+                        <div class="col-md-3 text-center">
+                            <i class="fa fa-camera" data-toggle="tooltip" data-placement="bottom" title="Lugares a visitar si tienes tiempo"> - Lugar Turístico</i>
+                        </div>
+                        <!--títulos-->
+                        <div class="col-md-3 text-center">
+                            <i class="fa fa-trophy" data-toggle="tooltip" data-placement="top" title="Allí va el equipo cuando gana algún título"> - Celebración Títulos</i>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <i class="fa fa-flag" data-toggle="tooltip" data-placement="bottom" title="No vayas por allí con artículos de tu equipo"> - Zona Ultras</i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+              <div class="container">
+                <div id="mapaSevilla"></div>
+              </div>
+            </section>
+        </div>
+        <!--mitad derecha-->
+        <div class="col-md-6 informacion">
+            <!--sección información-->
+            <section class="secInfo">
+                <div class="container">
+                    <div class="row">
+                        <!--escudo-->
+                        <div class="col-md-4">
+                            <div class="card text-center">
+                                <div class="card-header cartaCabecera">
+                                    <h5>Escudo</h5>
+                                </div>
+                                <img class="card-img-bottom" src="descarga.jpeg" alt="Escudo SFC" style="width:100%">
+                            </div>
+                        </div>
+                        <!--club-->
+                        <div class="col-md-4">
+                            <div class="card text-center">
+                                <div class="card-header cartaCabecera">
+                                    <h5>Club</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p>Ciudad: Sevilla</p>
+                                    <p>Dirección: c/ Sevilla Fútbol Club s/n</p>
+                                    <p>
+                                      Comunicación: 
+                                        <i class="fa fa-bus" data-toggle="tooltip" data-placement="top" title="Líneas de Bus: 32; C1"></i> |
+                                        <i class="fa fa-subway" data-toggle="tooltip" data-placement="bottom" title="Línea de Metro: Línea 1"></i>
+                                    </p>
+                                    
+                                    <!--modal dialogoEquipo-->
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#dialogoEquipo">Imágenes Club</button>
+
+                                    <div class="modal fade" id="dialogoEquipo">
+                                        <div class="modal-dialog modal-md modal-dialog-centered">
+                                          <div class="modal-content">
+                                            <!-- cabecera del diálogo -->
+                                            <div class="modal-header">
+                                              <h4 class="modal-title">Imágenes Club</h4>
+                                              <button type="button" class="close" data-dismiss="modal">X</button>
+                                            </div>
+                                      
+                                            <!-- cuerpo del diálogo -->
+                                            <div class="modal-body">
+                                                <div id="carrClub" class="carousel slide" data-ride="carousel">
+
+                                                    <!-- Indicators -->
+                                                    <ul class="carousel-indicators">
+                                                      <li data-target="#carrClub" data-slide-to="0" class="active"></li>
+                                                      <li data-target="#carrClub" data-slide-to="1"></li>
+                                                      <li data-target="#carrClub" data-slide-to="2"></li>
+                                                    </ul>
+                                                    
+                                                    <!-- The slideshow -->
+                                                    <div class="carousel-inner">
+                                                      <div class="carousel-item active">
+                                                        <img src="rsp.jpg" alt="Los Angeles" width="500" height="500">
+                                                        <div class="carousel-caption">
+                                                          <h4>Estadio Ramón Sánchez Pizjuán</h4>
+                                                        </div>
+                                                        
+                                                      </div>
+                                                      <div class="carousel-item">
+                                                        <img src="sfc_ptajerez.jpg" alt="Chicago" width="500" height="500">
+                                                        <div class="carousel-caption">
+                                                          <h4>Puerta de Jerez</h4>
+                                                        </div>
+                                                      </div>
+                                                      <div class="carousel-item">
+                                                        <img src="sevilla_catedral.jpg" alt="New York" width="500" height="500">
+                                                        <div class="carousel-caption">
+                                                          <h4>Catedral</h4>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    
+                                                    <!-- Left and right controls -->
+                                                    <a class="carousel-control-prev" href="#carrClub" data-slide="prev">
+                                                      <span class="carousel-control-prev-icon"></span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carrClub" data-slide="next">
+                                                      <span class="carousel-control-next-icon"></span>
+                                                    </a>
+                                                  </div>
+                                            </div>
+                                      
+                                            <!-- pie del diálogo -->
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                      
+                                          </div>
+                                        </div>
+                                    <!--fin dialogoEquipo-->
+                                    </div> 
+                                <!--fin de card-body-->   
+                                </div>
+                            </div>
+                        </div>
+                        <!--ocio-->
+                        <div class="col-md-4">
+                            <div class="card text-center">
+                                <div class="card-header cartaCabecera">
+                                    <h5>Ocio</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p>Sevilla cuenta con un centro histórico dotado de edificios históricos</p>
+                                    <p>Catedral</p>
+                                    <p>Torre del Oro</p>
+                                <!--    <a href="#" class="btn btn-primary">botón</a>   -->
+                                    <!--modal dialogoEquipo-->
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#dialogoOcio">Imágenes Turismo</button>
+                                    
+                                    <div class="modal fade" id="dialogoOcio">
+                                        <div class="modal-dialog modal-md modal-dialog-centered">
+                                          <div class="modal-content">
+                                            <!-- cabecera del diálogo -->
+                                            <div class="modal-header">
+                                              <h4 class="modal-title">Imágenes Ocio</h4>
+                                              <button type="button" class="close" data-dismiss="modal">X</button>
+                                            </div>
+                                      
+                                            <!-- cuerpo del diálogo -->
+                                            <div class="modal-body">
+                                                <div id="carrOcio" class="carousel slide" data-ride="carousel">
+
+                                                    <!-- Indicators -->
+                                                    <ul class="carousel-indicators">
+                                                      <li data-target="#carrOcio" data-slide-to="0" class="active"></li>
+                                                      <li data-target="#carrOcio" data-slide-to="1"></li>
+                                                      <li data-target="#carrOcio" data-slide-to="2"></li>
+                                                    </ul>
+                                                    
+                                                    <!-- The slideshow -->
+                                                    <div class="carousel-inner">
+                                                      <div class="carousel-item active">
+                                                        <img src="rsp.jpg" alt="Los Angeles" width="500" height="500">
+                                                        <div class="carousel-caption">
+                                                          <h4 class="degradado">Estadio Ramón Sánchez Pizjuán</h4>
+                                                        </div>
+                                                        
+                                                      </div>
+                                                      <div class="carousel-item">
+                                                        <img src="sfc_ptajerez.jpg" alt="Chicago" width="500" height="500">
+                                                        <div class="carousel-caption">
+                                                          <h4 class="degradado">Puerta de Jerez</h4>
+                                                        </div>
+                                                      </div>
+                                                      <div class="carousel-item">
+                                                        <img src="sevilla_catedral.jpg" alt="New York" width="500" height="500">
+                                                        <div class="carousel-caption">
+                                                          <h4 class="degradado">Catedral</h4>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    
+                                                    <!-- Left and right controls -->
+                                                    <a class="carousel-control-prev" href="#carrOcio" data-slide="prev">
+                                                      <span class="carousel-control-prev-icon"></span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carrOcio" data-slide="next">
+                                                      <span class="carousel-control-next-icon"></span>
+                                                    </a>
+                                                  </div>
+                                            </div>
+                                      
+                                            <!-- pie del diálogo -->
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                      
+                                          </div>
+                                        </div>
+                                    <!--fin dialogoEquipo-->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--sección previsión meteorológica-->
+            <section class="eltiempo">
+                    <div class="container text-center table-responsive">
+                                       
+                            <table class="table table-dark table-hover">
+                              <caption>
+                                  <h3>Previsión meteorológica</h3>
+                                  <h5>Sábado, 17 de Febrero</h5> 
+                              </caption>
+                              <thead>
+                                <tr>
+                                  <th>Tramo Horario</th>
+                                  <th>Previsión</th>
+                                  <th>Temperatura</th>
+                                </tr>
+                              </thead>
+                              <tbody class="prevision">
+                                <tr>
+                                  <td>Mañana</td>
+                                  <td><i class="fa fa-bolt"></i></td>
+                                  <td>16</td>
+                                </tr>
+                                <tr>
+                                  <td>Tarde</td>
+                                  <td><i class="fa fa-sun-o"></i></td>
+                                  <td>36</td>
+                                </tr>
+                                <tr>
+                                  <td>Noche</td>
+                                  <td><i class="fa fa-cloud"></i></td>
+                                  <td>20</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+            </section>
+        </div>
+    </div>
+    <!--pie-->
+    <div></div>
+  </div>
+  
+</body>
+</html>
