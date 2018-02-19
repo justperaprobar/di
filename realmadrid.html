@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>RMCF</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .barra{
+      background: linear-gradient(to right, white,purple);
+      text-align: center;
+      margin:2% 0 2% 0;
+      border-radius: 25px;
+    }
+    
+    .mapa{
+      /*  background-color: dimgrey;  */
+        height: 100%;
+    }
+    
+    .informacion{
+      /*  background-color: lime;   */
+    }
+    
+    h3,h4{
+        text-align: center;
+    }
+    .cartaCabecera{
+        background-color:purple !important;
+        color:white;
+        border-color:black;
+    }
+    .cartaCabecera:hover{
+        background-color:white !important;
+        color:purple;
+        border-color: 2px solid black;
+    }
+    .card{
+       height:100%;
+    }
+    .card-body{
+      font-size:20px;
+    }
+    .carousel .carousel-indicators li{
+        background-color: purple;
+    }
+
+    .carousel-caption h4{
+        color:black;
+    }
+    .degradado{
+        color:black;
+        background: linear-gradient(to right, white, purple);
+        opacity: .5;
+        border-radius: 25px;
+    }
+    .card:hover{
+        background-color:purple;
+        color:white;
+        border-color:white;
+    }
+    
+    .leyenda i{
+      font-size: 20px;
+      color:antiquewhite;
+    }
+    
+    .prevision, .prevision i{
+      color:white;
+      font-size:20px;
+    }
+    .mapa h3{
+      border-left: 5px solid purple;
+      text-align: left;
+      padding-left: 16px;
+    }
+    .eltiempo{
+      margin-top:5%;
+    }
+    table caption{
+      caption-side: top;
+      border: 1px solid black;
+      background-color:#212529;
+      
+    }
+    table tr{
+      font-size:1.16rem;
+    }
+    .modal-title{
+      color:purple;
+    }
+    #mapaMadrid{
+      margin-top: 20px;
+      width: 100%;
+      height: 700px;
+    	border: 1px solid purple; 
+    }
+    body{
+      background-image: url('campo_futbol.jpeg');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .marco_logo a, .logo_encabezado a {
+      text-decoration: none !important;
+      color: white;
+      font-family: Titulos;
+    }
+    /*
+    .logo_encabezado {
+      cursor: default;
+      width: 100%;
+      margin: 15px auto;
+      font-size: 5em;
+      text-shadow: 2px 2px #030800;
+    }
+    */
+    .logo_encabezado{
+      width:100%;
+      margin:15px auto;
+      font-size:5em;
+    }
+    @font-face{
+      font-family: Titulos;
+      src: url(Mattoa_Demo.ttf);
+    }
+  /*  .marco_logo a {
+      font-family: Titulos !important;
+      color: white;
+    }*/
+       
+  </style>
+
+
+
+<script type="text/javascript" 
+  src="http://maps.google.com/maps/api/js?key=AIzaSyCXOCjGmYFC1v8Cg3KF5HQrwOTTQE8lQQw">
+  //AIzaSyA6Bqzcoc3TVzxOZ4KESo6V0SgYMjWrlnQ   //no usar
+</script>
+
+<script src="pAJAX.js"></script>
+
+  <script type="text/javascript">
+
+      var peti = new pAJAX();
+
+      window.onload=function(){
+  	    
+        CargarMapa();
+
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+  
+    function CargarMapa() {
+      //aquí cargo el mapa
+      var divMapa = document.getElementById("mapaMadrid");
+      //centro - RSP
+    /*  var centro=new google.maps.LatLng(37.3841, -5.9707);
+      //zona ultras
+    //  var ultras=new google.mpas.LatLng(37.3701669,-5.9752466);
+      //opciones
+      var opciones = { 
+        center: centro,
+        zoom: 16
+      };
+      //marker RSP
+      var rsp = new google.maps.Marker({
+        position: centro,
+        animation: google.maps.Animation.BOUNCE,
+        icon:'sfc_30_30.png'
+      });
+      //marker ultras
+    //  var banderin=new google
+      //  Dibujamos el mapa:
+      var mapa = new google.maps.Map(divMapa, opciones);
+      //el marcador RSP
+      rsp.setMap(mapa); */
+
+      var marcadores=[
+        ['sb',40.45267237,-3.687847361],
+      //  ['ultras',40.45267237,-3.685847361],
+        ['titulos',40.4192500,-3.6932700],
+        ['elretiro',40.41349419,-3.68133283],
+        ['casacampo',40.4214,-3.7537]
+      //  ['torreOro',37.3823384,-5.9964125]
+      ];
+      var iconos=[
+        'realmadrid.png',
+      //  'banderin_30_30.jpg',
+        'copa_30_30.jpeg',
+        'camara_30_30.jpeg',
+        'camara_30_30.jpeg'
+      //  'camara_30_30.jpeg'
+        ];
+      //centro del mapa
+      var centro=new google.maps.LatLng(40.45267237,-3.687847361);
+      //opciones
+      var opciones = { 
+        center: centro,
+        zoom: 12
+      };
+      var mapa = new google.maps.Map(divMapa, opciones);
+      var marcador;
+    //  alert(marcadores.length);
+      for(i=0; i<marcadores.length; i++){
+        marcador=new google.maps.Marker({
+          position: new google.maps.LatLng(marcadores[i][1],marcadores[i][2]),
+          animation: google.maps.Animation.BOUNCE,
+          icon:iconos[i],
+          map: mapa
+        });
+      }
+    }
+
+    </script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">              
+            <h1 id="marco_logo" class="logo_encabezado text-center"><a href="index.html">FutFamily</a></h1>    
+        </div>
+    </div>
+  <div class="container-fluid">
+    <h1 class="barra">REAL MADRID CLUB DE FÚTBOL</h1>
+    <!---->
+    <div class="row">
+        <!--mitad izquierda-->
+        <div class="col-md-6 mapa">
+            <section class="">
+                <div class="container mapa">
+                    <h3>Leyenda del mapa</h3>
+                    <div class="row leyenda">
+                      
+                        <!--estadio-->
+                        <div class="col-md-3 text-center">
+                            <i class="fa fa-futbol-o" data-toggle="tooltip" data-placement="top" title="Lugar donde vas a ver el partido"> - Estadio</i>
+                        </div>
+                        <!--turismo-->
+                        <div class="col-md-3 text-center">
+                            <i class="fa fa-camera" data-toggle="tooltip" data-placement="bottom" title="Lugares a visitar si tienes tiempo"> - Lugar Turístico</i>
+                        </div>
+                        <!--títulos-->
+                        <div class="col-md-3 text-center">
+                            <i class="fa fa-trophy" data-toggle="tooltip" data-placement="top" title="Allí va el equipo cuando gana algún título"> - Celebración Títulos</i>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <i class="fa fa-flag" data-toggle="tooltip" data-placement="bottom" title="No vayas por allí con artículos de tu equipo"> - Zona Ultras</i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+              <div class="container">
+                <div id="mapaMadrid"></div>
+              </div>
+            </section>
+        </div>
+        <!--mitad derecha-->
+        <div class="col-md-6 informacion">
+            <!--sección información-->
+            <section class="secInfo">
+                <div class="container">
+                    <div class="row">
+                        <!--escudo-->
+                        <div class="col-md-4">
+                            <div class="card text-center">
+                                <div class="card-header cartaCabecera">
+                                    <h5>Escudo</h5>
+                                </div>
+                                <img class="card-img-bottom" src="rm.png" alt="Escudo SFC" style="width:100%">
+                            </div>
+                        </div>
+                        <!--club-->
+                        <div class="col-md-4">
+                            <div class="card text-center">
+                                <div class="card-header cartaCabecera">
+                                    <h5>Club</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p>Ciudad: Madrid</p>
+                                    <p>Dirección: Av Concha Espina 1</p>
+                                    <p>
+                                      Comunicación: 
+                                        <i class="fa fa-bus" data-toggle="tooltip" data-placement="top" title="Líneas de Bus: 43; 120; 150"></i> |
+                                        <i class="fa fa-subway" data-toggle="tooltip" data-placement="bottom" title="Línea de Metro: Línea 10"></i>
+                                    </p>
+                                    
+                                    <!--modal dialogoEquipo-->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogoEquipo">Imágenes Club</button>
+
+                                    <div class="modal fade" id="dialogoEquipo">
+                                        <div class="modal-dialog modal-md modal-dialog-centered">
+                                          <div class="modal-content">
+                                            <!-- cabecera del diálogo -->
+                                            <div class="modal-header">
+                                              <h4 class="modal-title">Imágenes Club</h4>
+                                              <button type="button" class="close" data-dismiss="modal">X</button>
+                                            </div>
+                                      
+                                            <!-- cuerpo del diálogo -->
+                                            <div class="modal-body">
+                                                <div id="carrClub" class="carousel slide" data-ride="carousel">
+
+                                                    <!-- Indicators -->
+                                                    <ul class="carousel-indicators">
+                                                      <li data-target="#carrClub" data-slide-to="0" class="active"></li>
+                                                      <li data-target="#carrClub" data-slide-to="1"></li>
+                                                      <li data-target="#carrClub" data-slide-to="2"></li>
+                                                    </ul>
+                                                    
+                                                    <!-- The slideshow -->
+                                                    <div class="carousel-inner">
+                                                      <div class="carousel-item active">
+                                                        <img src="sb2.jpeg" alt="Estadio" width="500" height="500">
+                                                        <div class="carousel-caption">
+                                                          <h4 class="degradado">Estadio Santiago Bernabéu</h4>
+                                                        </div>
+                                                        
+                                                      </div>
+                                                      <div class="carousel-item">
+                                                        <img src="acibeles.jpeg" alt="celebración" width="500" height="500">
+                                                        <div class="carousel-caption">
+                                                          <h4 class="degradado">Cibeles</h4>
+                                                        </div>
+                                                      </div>
+                                                      <div class="carousel-item">
+                                                        <img src="palmares.jpeg" alt="palmares" width="500" height="500">
+                                                        <div class="carousel-caption">
+                                                          <h4 class="degradado">Palmarés RMCF</h4>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    
+                                                    <!-- Left and right controls -->
+                                                    <a class="carousel-control-prev" href="#carrClub" data-slide="prev">
+                                                      <span class="carousel-control-prev-icon"></span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carrClub" data-slide="next">
+                                                      <span class="carousel-control-next-icon"></span>
+                                                    </a>
+                                                  </div>
+                                            </div>
+                                      
+                                            <!-- pie del diálogo -->
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                      
+                                          </div>
+                                        </div>
+                                    <!--fin dialogoEquipo-->
+                                    </div> 
+                                <!--fin de card-body-->   
+                                </div>
+                            </div>
+                        </div>
+                        <!--ocio-->
+                        <div class="col-md-4">
+                            <div class="card text-center">
+                                <div class="card-header cartaCabecera">
+                                    <h5>Ocio</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p>Madrid...ciudad moderna</p>
+                                    <p>El Retiro</p>
+                                    <p>Casa de Campo</p>
+                                <!--    <a href="#" class="btn btn-primary">botón</a>   -->
+                                    <!--modal dialogoEquipo-->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogoOcio">Imágenes Turismo</button>
+                                    
+                                    <div class="modal fade" id="dialogoOcio">
+                                        <div class="modal-dialog modal-md modal-dialog-centered">
+                                          <div class="modal-content">
+                                            <!-- cabecera del diálogo -->
+                                            <div class="modal-header">
+                                              <h4 class="modal-title">Imágenes Ocio</h4>
+                                              <button type="button" class="close" data-dismiss="modal">X</button>
+                                            </div>
+                                      
+                                            <!-- cuerpo del diálogo -->
+                                            <div class="modal-body">
+                                                <div id="carrOcio" class="carousel slide" data-ride="carousel">
+
+                                                    <!-- Indicators -->
+                                                    <ul class="carousel-indicators">
+                                                      <li data-target="#carrOcio" data-slide-to="0" class="active"></li>
+                                                      <li data-target="#carrOcio" data-slide-to="1"></li>
+                                                    <!--  <li data-target="#carrOcio" data-slide-to="2"></li> -->
+                                                    </ul>
+                                                    
+                                                    <!-- The slideshow -->
+                                                    <div class="carousel-inner">
+                                                      <div class="carousel-item active">
+                                                        <img src="retiro.jpeg" alt="parque el retiro" width="500" height="500">
+                                                        <div class="carousel-caption">
+                                                          <h4 class="degradado">Parque El Retiro</h4>
+                                                        </div>
+                                                        
+                                                      </div>
+                                                      <div class="carousel-item">
+                                                        <img src="ptaalcala.jpeg" alt="puerta" width="500" height="500">
+                                                        <div class="carousel-caption">
+                                                          <h4 class="degradado">Puerta de Alcalá</h4>
+                                                        </div>
+                                                      </div>
+                                                      <!--
+                                                      <div class="carousel-item">
+                                                        <img src="sevilla_catedral.jpg" alt="New York" width="500" height="500">
+                                                        <div class="carousel-caption">
+                                                          <h4 class="degradado">Catedral</h4>
+                                                        </div>
+                                                      </div>
+                                                    -->
+                                                    </div>
+                                                    
+                                                    <!-- Left and right controls -->
+                                                    <a class="carousel-control-prev" href="#carrOcio" data-slide="prev">
+                                                      <span class="carousel-control-prev-icon"></span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carrOcio" data-slide="next">
+                                                      <span class="carousel-control-next-icon"></span>
+                                                    </a>
+                                                  </div>
+                                            </div>
+                                      
+                                            <!-- pie del diálogo -->
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                      
+                                          </div>
+                                        </div>
+                                    <!--fin dialogoEquipo-->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--sección previsión meteorológica-->
+            <section class="eltiempo">
+                    <div class="container text-center table-responsive">
+                                       
+                            <table class="table table-dark table-hover">
+                              <caption>
+                                  <h3>Previsión meteorológica</h3>
+                                  <h5>Sábado, 17 de Febrero</h5> 
+                              </caption>
+                              <thead>
+                                <tr>
+                                  <th>Tramo Horario</th>
+                                  <th>Previsión</th>
+                                  <th>Temperatura</th>
+                                </tr>
+                              </thead>
+                              <tbody class="prevision">
+                                <tr>
+                                  <td>Mañana</td>
+                                  <td><i class="fa fa-bolt"></i></td>
+                                  <td>16</td>
+                                </tr>
+                                <tr>
+                                  <td>Tarde</td>
+                                  <td><i class="fa fa-sun-o"></i></td>
+                                  <td>36</td>
+                                </tr>
+                                <tr>
+                                  <td>Noche</td>
+                                  <td><i class="fa fa-cloud"></i></td>
+                                  <td>20</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+            </section>
+        </div>
+    </div>
+    <!--pie-->
+    <div></div>
+  </div>
+  
+</body>
+</html>
