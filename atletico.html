@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CAM</title>
+
+    <style>
+        body{
+            background-image: url('campo_futbol.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .marco_logo a, .logo_encabezado a {
+            text-decoration: none !important;
+            color: white;
+            font-family: Titulos;
+        }
+    /*
+    .logo_encabezado {
+      cursor: default;
+      width: 100%;
+      margin: 15px auto;
+      font-size: 5em;
+      text-shadow: 2px 2px #030800;
+    }
+    */
+        .logo_encabezado{
+            width:100%;
+            margin:15px auto;
+            font-size:5em;
+        }
+        @font-face{
+            font-family: Titulos;
+            src: url(Mattoa_Demo.ttf);
+        }
+        .carta{
+            margin-top:10%;
+        }
+        p{
+            font-size: 20px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <div class="row">              
+            <h1 id="marco_logo" class="logo_encabezado text-center"><a href="index.html">FutFamily</a></h1>    
+        </div>
+    </div>
+
+    <div class="container carta">
+        <div class="card text-center">
+            <div class="card-header bg-warning">
+                <h1>Información de Servicio</h1>
+            </div>
+            <div class="card-body">
+              <p>Debido a acontecimientos recientes, FutFamily desaconseja acudir a este estadio.</p>
+              
+              <p>Disculpen las molestias.</p>
+              <a href="index.html" class="btn btn-primary">Volver a Página principal</a>
+            </div>
+        
+        </div> 
+    </div>
+
+</body>
+</html>
